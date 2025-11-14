@@ -93,6 +93,29 @@ So there is no noticeable difference between the practical measurements and the 
 
 ---
 
+## Example code:
+```
+while (i < text.length()) { // --> Traverse the text
+            if (text.charAt(i) == pattern.charAt(j)) { // --> Characters match -> move both pointers
+                i++;
+                j++;
+
+
+                if (j == pattern.length()) { // --> Found a full match
+                    result.add(i - j); // --> Add starting index
+
+                    j = lps[j - 1]; // --> Continue searching
+                }
+            } else {
+                if (j != 0) { // --> Mismatch after j matches
+                    j = lps[j - 1]; // --> roll back to the pattern using LPS
+                } else {
+                    i++; // --> No partial match, move text
+                }
+            }
+}
+```
+
 ### 4. Result
 
 The practical measurements follow the expected linear trend:
